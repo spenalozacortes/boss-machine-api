@@ -10,4 +10,11 @@ const {
     deleteAllFromDatabase // (model) --> empty array
 } = require('./db'); 
 
+// Get all meetings
+meetingsRouter.get('/', (req, res, next) => {
+    const meetings = getAllFromDatabase('meetings');
+
+    res.send(meetings);
+});
+
 module.exports = meetingsRouter;
