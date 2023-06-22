@@ -8,4 +8,11 @@ const {
     deleteFromDatabasebyId // (model, id) --> true | false
 } = require('./db'); 
 
+// Get all ideas
+ideasRouter.get('/', (req, res, next) => {
+    const ideas = getAllFromDatabase('ideas');
+
+    res.send(ideas);
+});
+
 module.exports = ideasRouter;
