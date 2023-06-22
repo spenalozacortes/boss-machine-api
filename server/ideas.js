@@ -32,4 +32,15 @@ ideasRouter.get('/:ideaId', (req, res, next) => {
     }    
 });
 
+// Update an idea
+ideasRouter.put('/:ideaId', (req, res, next) => {
+    const updatedIdea = updateInstanceInDatabase('ideas', req.body);
+
+    if (updatedIdea) {
+        res.send(updatedIdea);
+    } else {
+        res.status(404).send();
+    }
+});
+
 module.exports = ideasRouter;
