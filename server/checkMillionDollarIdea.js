@@ -1,3 +1,4 @@
+// Middleware that won't allow to create a new idea if it's worth less than one million dollars
 const checkMillionDollarIdea = (req, res, next) => {
     const { weeklyRevenue, numWeeks } = req.body;
     const total = weeklyRevenue * numWeeks;
@@ -9,5 +10,4 @@ const checkMillionDollarIdea = (req, res, next) => {
     }
 };
 
-// Leave this exports assignment so that the function can be used elsewhere
 module.exports = checkMillionDollarIdea;
