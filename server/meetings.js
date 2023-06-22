@@ -3,10 +3,7 @@ const meetingsRouter = express.Router();
 const { 
     createMeeting,
     getAllFromDatabase, // (model) --> array | null
-    getFromDatabaseById, // (model, id) --> instance | null
     addToDatabase, // (model, instance) --> instance | error
-    updateInstanceInDatabase, // (model, instance) --> instance | null, error
-    deleteFromDatabasebyId, // (model, id) --> true | false
     deleteAllFromDatabase // (model) --> empty array
 } = require('./db'); 
 
@@ -15,6 +12,13 @@ meetingsRouter.get('/', (req, res, next) => {
     const meetings = getAllFromDatabase('meetings');
 
     res.send(meetings);
+});
+
+// Create a new meeting
+meetingsRouter.post('/', (req, res, next) => {
+    const meeting = addToDatabase('meetings', createMeeting());
+
+    res.status(201).send(meeting);
 });
 
 module.exports = meetingsRouter;
