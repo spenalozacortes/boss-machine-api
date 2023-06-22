@@ -7,6 +7,7 @@ const {
     updateInstanceInDatabase, // (model, instance) --> instance | null, error
     deleteFromDatabasebyId // (model, id) --> true | false
 } = require('./db'); 
+const checkMillionDollarIdea = require('./checkMillionDollarIdea');
 
 // Extract ideaId parameter and attach it to request object
 ideasRouter.param('ideaId', (req, res, next, id) => {
@@ -44,7 +45,7 @@ ideasRouter.put('/:ideaId', (req, res, next) => {
 });
 
 // Add a new idea
-ideasRouter.post('/', (req, res, next) => {
+ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
     const newIdea = addToDatabase('ideas', req.body);
 
     res.status(201).send(newIdea);
