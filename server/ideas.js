@@ -43,4 +43,11 @@ ideasRouter.put('/:ideaId', (req, res, next) => {
     }
 });
 
+// Add a new idea
+ideasRouter.post('/', (req, res, next) => {
+    const newIdea = addToDatabase('ideas', req.body);
+
+    res.status(201).send(newIdea);
+});
+
 module.exports = ideasRouter;
