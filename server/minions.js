@@ -4,7 +4,7 @@ const {
     getAllFromDatabase, // (model) --> array | null
     getFromDatabaseById, // (model, id) --> instance | null
     addToDatabase, // (model, instance) --> instance | error
-    updateInstanceInDatabase, // (model, instance) --> instance | null, error
+    updateInstanceInDatabase, // (model, updated instance) --> instance | null, error
     deleteFromDatabasebyId // (model, id) --> true | false
 } = require('./db'); 
 
@@ -32,12 +32,14 @@ minionsRouter.get('/:minionId', (req, res, next) => {
 });
 
 // Update a minion
-/* minionsRouter.put('/:minionId', (req, res, next) => {
-    const minion = getFromDatabaseById('minions', req.id);
-    const updatedMinion = updateInstanceInDatabase('minions', minion);
+minionsRouter.put('/:minionId', (req, res, next) => {
+    const updatedMinion = updateInstanceInDatabase('minions', req.body);
 
-    res.send(updatedMinion); 
+    if (updatedMinion) { // valid ID
+        res.send(updatedMinion); 
+    } else {
+        res.status(404).send();
+    }  
 });
- */
 
 module.exports = minionsRouter;
